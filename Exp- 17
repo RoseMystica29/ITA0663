@@ -1,0 +1,30 @@
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+
+data = {
+    "RAM":[2,4,6,8,12],
+    "Storage":[32,64,128,128,256],
+    "Battery":[3000,4000,4500,5000,6000],
+    "Price":["Low","Medium","Medium","High","High"]
+}
+df = pd.DataFrame(data)
+
+X = df[['RAM','Storage','Battery']]
+y = df['Price']
+
+model = DecisionTreeClassifier()
+model.fit(X,y)
+
+new_mobile = pd.DataFrame({
+    "RAM":[8],
+    "Storage":[256],
+    "Battery":[5000]
+})
+
+prediction = model.predict(new_mobile)
+
+print("Mobile Details:")
+print(new_mobile)
+
+print("\nPredicted Price Category:")
+print(prediction[0])
