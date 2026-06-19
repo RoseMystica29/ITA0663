@@ -1,0 +1,29 @@
+import pandas as pd
+from sklearn.naive_bayes import GaussianNB
+
+data = {
+    "Income":[25,40,60,80,50,35],
+    "CreditScore":[600,650,720,800,700,620],
+    "LoanAmount":[2,5,8,10,6,3],
+    "LoanStatus":["No","No","Yes","Yes","Yes","No"]
+}
+df = pd.DataFrame(data)
+
+X = df[['Income','CreditScore','LoanAmount']]
+y = df['LoanStatus']
+
+model = GaussianNB()
+model.fit(X,y)
+
+new_customer = pd.DataFrame({
+    "Income":[55],
+    "CreditScore":[710],
+    "LoanAmount":[7]
+})
+prediction = model.predict(new_customer)
+
+print("Customer Details:")
+print(new_customer)
+
+print("\nLoan Prediction:")
+print(prediction[0])
